@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i> CDP Support</h5>
+            </div>
+            <div class="card-body">
+                <p>I can help you with questions about:</p>
+                <ul>
+                    <li>Setting up sources and destinations</li>
+                    <li>Creating user profiles</li>
+                    <li>Building audience segments</li>
+                    <li>Data integration methods</li>
+                    <li>Platform comparisons</li>
+                </ul>
+                <p class="mb-0">Try asking a "how-to" question about any of the supported CDPs!</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i> Example Questions</h5>
+            </div>
+            <div class="card-body">
+                <div class="example-questions">
+                    <p class="example-question" onclick="setQuestion(this)">How do I set up a new source in Segment?</p>
+                    <p class="example-question" onclick="setQuestion(this)">How can I create a user profile in mParticle?</p>
+                    <p class="example-question" onclick="setQuestion(this)">How do I build an audience segment in Lytics?</p>
+                    <p class="example-question" onclick="setQuestion(this)">How can I integrate my data with Zeotap?</p>
+                    <p class="example-question" onclick="setQuestion(this)">How does Segment's audience creation compare to Lytics?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-9">
+        <div class="card chat-container">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-comments me-2"></i> Chat with CDP Support Agent</h5>
+            </div>
+            <div class="card-body">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            <p>Hi! I'm your CDP Support Agent. I can help with questions about Segment, mParticle, Lytics, and Zeotap. How can I help you today?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <form id="chat-form" class="d-flex">
+                    <input type="text" id="user-input" class="form-control me-2" placeholder="Type your question here..." required>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize markdown-it
+    const md = window.markdownit({
+        html: true,
+        linkify: true,
+        typographer: true,
+        highlight: function (str, lang) {
+            if (lang && hljs.getLanguage(lang)) {
+                try {
+                    return hljs.highlight(str, { language: lang }).value;
+                } catch (__) {}
+            }
+            return ''; // use external default escaping
+        }
+    });
+</script>
+{% endblock %}
